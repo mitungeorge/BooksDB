@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+/*.star-icon {
+    color: #ddd;
+    font-size: 1.8em !important;
+    position: relative;
+}
+
+.star-icon:before {
+    color: gold !important;
+}
+*/
+
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';

@@ -1,0 +1,134 @@
+ <div class="container">
+  <nav class="blue-grey darken-3">
+    <div class="nav-wrapper">
+      <span class="brand-logo">{{title}}</span>
+      <ul class="right hide-on-med-and-down">
+        <li><span><i class="material-icons left">library_books</i></span></li>
+      </ul>
+    </div>
+  </nav>
+
+
+ <div class="row">
+        <div class="card col s12 m3 white boarder">
+      <!-- <div class="card-panel blue-grey darken-3">
+        <span style="color:white">Query Builder</span>
+      </div> -->
+      <div class="card-body">
+        <form action="#">
+<!-- ISBN -->
+          <p>
+            <label>
+              <input [(ngModel)]="isbnSet" type="checkbox" (click)="isbnChecked(event)" name="isbn"/>
+              <span>ISBN</span>
+            </label>
+        </p>
+        <div class="input-field">
+          <input [attr.disabled]="!isbnSet ? '' : null" id="isbn" type="text" class="validate">
+          <label for="isbn">ISBN</label>
+        </div>
+
+
+<!-- Author -->
+         <p>
+            <label>
+              <input [(ngModel)]="authorSet" type="checkbox" (click)="authorChecked()"  name="author"/>
+              <span>Author</span>
+            </label>
+        </p>
+        <div class="input-field">
+          <input [attr.disabled]="!authorSet ? '' : null" id="author" type="text" class="validate">
+          <label for="author">Author</label>
+        </div>
+
+<!-- Title -->
+         <p>
+            <label>
+              <input [(ngModel)]="titleSet" type="checkbox" (click)="titleChecked()"  name="title"/>
+              <span>Title</span>
+            </label>
+        </p>
+        <div class="input-field">
+          <input [attr.disabled]="!titleSet ? '' : null" id="title" type="text" class="validate">
+          <label for="title">Title</label>
+        </div>
+
+
+<!-- Price -->
+        <p>
+            <label>
+              <input [(ngModel)]="priceSet" type="checkbox" (click)="priceChecked()"  name="price" />
+              <span>Price</span>
+            </label>
+        </p>
+
+       <span *ngIf="priceSet; else editPrice">
+       <ion-range-slider [min]="min" [max]="max" (onChange)="update(simpleSlider, $event)"></ion-range-slider>
+     </span>
+     <ng-template #editPrice>
+      <ion-range-slider [min]="0" [max]="0" ></ion-range-slider>
+      </ng-template> 
+
+        <p>
+            <label>
+              <input [(ngModel)]="reviewsSet" type="checkbox" (click)="reviewsChecked()" name="reviews" />
+              <span>Reviews</span>
+            </label>
+        </p>
+        
+        </form>
+
+
+<!-- Reviews -->
+    <span *ngIf="!reviewsSet; else editRating">
+        <rating [(ngModel)]="zero"
+              [max]="5"
+              [disabled]="true">
+      </rating> & Up
+      </span>
+    <ng-template #editRating>
+    <rating [(ngModel)]="rating"
+              [max]="5"
+              >
+      </rating> & Up
+          </ng-template> 
+
+
+<!-- Button -->
+        <br /><br />
+        <button type="button" class="btn btn-outline-info blue-grey darken-3 go" (click)=search()>Go!</button>
+      </div>
+    </div>
+
+
+<!-- Table -->
+ 
+    <div class="col s12 m9">
+      <div class="card-panel white boarder">
+
+                  <div>
+            <mat-table [dataSource]="books">
+              <ng-container matColumnDef="bookid">
+                <mat-header-cell *matHeaderCellDef> Book Id </mat-header-cell>
+                <mat-cell *matCellDef="let book"> {{book.userId}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+                <mat-cell *matCellDef="let book"> {{book.id}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="title">
+                <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+                <mat-cell *matCellDef="let book"> {{book.title}} </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+          </div>
+       
+      </div>
+    </div>
+  </div>
+
+
+ </div> 
+
